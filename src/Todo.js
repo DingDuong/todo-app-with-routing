@@ -2,8 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./Todo.css";
 import TodoForm from "./TodoForm";
+import { Link } from "react-router-dom";
 
 const Todo = ({
+  id,
   isComplete,
   title,
   description,
@@ -25,7 +27,7 @@ const Todo = ({
 
   return (
     <div className={`Todo ${complete}`}>
-      <h3>{title}</h3>
+      <h3><Link to={`/todos/${id}`}>{title}</Link></h3>
       <p>{description}</p>
       <div className="button-wrapper">
         <button className="complete-button" onClick={toggleComplete}>
@@ -44,6 +46,7 @@ const Todo = ({
 };
 
 Todo.propTypes = {
+  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   isComplete: PropTypes.bool.isRequired,

@@ -77,6 +77,7 @@ class TodoList extends Component {
     const todos = this.state.todos.map(todo => (
       <Todo
         key={todo.id}
+        id={todo.id}
         title={todo.title}
         description={todo.description}
         handleDelete={this.handleDelete.bind(this, todo.id)}
@@ -88,17 +89,28 @@ class TodoList extends Component {
       />
     ));
 
+    const getSingleComponent = routeProps => {
+      const id = +routeProps.match.params.id;
+      const todo = todos.find(todo => id === todo.props.id);
+      return <div>{todo}</div>;
+    }
+
     return (
       <div>
-        
         <Switch>
           <Route
-            path="/todos/new"
-            render={props => <TodoForm handleSubmit={this.handleAdd} {...props} />}
+            exact
+            path="/todos"
+            render={() => <div>{todos}</div>}
           />
           <Route
-            path="/todos"
-            render={props => <div>{todos}</div>}
+            exact
+            path="/todos/new"
+            render={routeProps => <TodoForm handleSubmit={this.handleAdd} {...routeProps} />}
+          />
+          <Route 
+            path="/todos/:id"
+            render={getSingleComponent}
           />
           <Redirect to="/todos" />
         </Switch>
