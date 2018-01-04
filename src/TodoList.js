@@ -100,7 +100,7 @@ class TodoList extends Component {
             path="/todos"
             render={props => <div>{todos}</div>}
           />
-          <Redirect to="/tacos" />
+          <Redirect to="/todos" />
         </Switch>
       </div>
     );
