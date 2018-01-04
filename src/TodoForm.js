@@ -21,15 +21,17 @@ class TodoForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.handleSubmit(this.state);
-    this.setState({
-      title: "",
-      description: ""
-    });
+    if (this.state.title) {
+      this.props.handleSubmit(this.state);
+      this.setState({
+        title: "",
+        description: ""
+      });
+    }
   }
 
   render() {
-    let val = this.props.title ? "Edit this todo!" : "Add this todo!";
+    let buttonText = this.props.title ? "Edit this todo!" : "Add this todo!";
     let { title, description } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
@@ -57,7 +59,7 @@ class TodoForm extends Component {
             />
           </label>
         </div>
-        <input type="submit" value={val} />
+        <input type="submit" value={buttonText} />
       </form>
     );
   }

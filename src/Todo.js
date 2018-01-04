@@ -44,7 +44,6 @@ const Todo = ({
 };
 
 Todo.propTypes = {
-  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   isComplete: PropTypes.bool.isRequired,

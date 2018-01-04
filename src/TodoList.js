@@ -5,11 +5,15 @@ import TodoForm from "./TodoForm";
 class TodoList extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      todos: [],
+      latestId: 0
+    }
     this.handleAdd = this.handleAdd.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     let todos = JSON.parse(localStorage.getItem("todos")) || [];
     let latestId = +JSON.parse(localStorage.getItem("latestId")) || 0;
     this.setState({ todos, latestId });
@@ -72,7 +76,6 @@ class TodoList extends Component {
     const todos = this.state.todos.map(todo => (
       <Todo
         key={todo.id}
-        id={todo.id}
         title={todo.title}
         description={todo.description}
         handleDelete={this.handleDelete.bind(this, todo.id)}
