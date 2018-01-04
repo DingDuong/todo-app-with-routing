@@ -23,10 +23,7 @@ class TodoForm extends Component {
     e.preventDefault();
     if (this.state.title) {
       this.props.handleSubmit(this.state);
-      this.setState({
-        title: "",
-        description: ""
-      });
+      this.props.history.push("/todos");
     }
   }
 

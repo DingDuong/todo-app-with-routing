@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Todo from "./Todo";
 import TodoForm from "./TodoForm";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 class TodoList extends Component {
   constructor(props) {
@@ -89,11 +90,28 @@ class TodoList extends Component {
 
     return (
       <div>
-        <TodoForm handleSubmit={this.handleAdd} />
-        {todos}
+        
+        <Switch>
+          <Route
+            path="/todos/new"
+            render={props => <TodoForm handleSubmit={this.handleAdd} {...props} />}
+          />
+          <Route
+            path="/todos"
+            render={props => <div>{todos}</div>}
+          />
+          <Redirect to="/tacos" />
+        </Switch>
       </div>
     );
   }
 }
 
 export default TodoList;
+
+
+
+
+
+
+
